@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engfa Waraha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#0B3532;
+    --bg-panel:#103F3B;
+    --bg-panel-2:#0E3835;
+    --gold:#C9A227;
+    --gold-light:#E8C874;
+    --ivory:#F6F1E4;
+    --rose:#D98B7B;
+    --muted:#9FB8B2;
+    --line: rgba(201,162,39,0.25);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg-deep);
+    color:var(--ivory);
+    font-family:'Work Sans', sans-serif;
+    font-weight:300;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3, .display{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    letter-spacing:0.01em;
+  }
+  a{color:var(--gold-light);}
+
+  /* ---------- Sash pattern (signature element) ---------- */
+  .sash-bg{
+    position:relative;
+    overflow:hidden;
+  }
+  .sash-bg::before{
+    content:"";
+    position:absolute;
+    inset:-40% -10%;
+    background:repeating-linear-gradient(
+      115deg,
+      transparent 0 78px,
+      var(--line) 78px 79px,
+      transparent 79px 156px
+    );
+    opacity:0.5;
+    pointer-events:none;
+  }
+
+  /* ---------- Header / Hero ---------- */
+  header{
+    position:relative;
+    padding:5.5rem 6vw 5rem;
+    background:
+      radial-gradient(ellipse at 80% -10%, rgba(201,162,39,0.16), transparent 55%),
+      var(--bg-deep);
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'Work Sans', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.28em;
+    font-size:0.72rem;
+    color:var(--gold-light);
+    margin-bottom:1.1rem;
+  }
+  header h1{
+    font-size:clamp(2.8rem, 7vw, 5.2rem);
+    margin:0 0 0.6rem;
+    color:var(--ivory);
+    line-height:1.02;
+  }
+  header .title-line{
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    margin-bottom:1.6rem;
+  }
+  header .title-line .rule{
+    height:1px;
+    width:64px;
+    background:var(--gold);
+  }
+  header p.role{
+    font-size:1.15rem;
+    color:var(--gold-light);
+    font-style:italic;
+    font-family:'Playfair Display', serif;
+    margin:0 0 2rem;
+  }
+  header .lede{
+    max-width:56ch;
+    color:var(--muted);
+    font-size:1.05rem;
+  }
+
+  .badge-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.8rem;
+    margin-top:2.2rem;
+  }
+  .badge{
+    border:1px solid var(--line);
+    color:var(--gold-light);
+    font-size:0.78rem;
+    letter-spacing:0.04em;
+    padding:0.5rem 1rem;
+    border-radius:2px;
+    background:rgba(201,162,39,0.06);
+  }
+
+  /* ---------- Section shell ---------- */
+  section{
+    padding:4.5rem 6vw;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:1rem;
+    margin-bottom:2.6rem;
+  }
+  .section-head .num{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    color:var(--gold);
+    font-size:1rem;
+    opacity:0.85;
+  }
+  .section-head h2{
+    font-size:clamp(1.7rem, 3vw, 2.3rem);
+    margin:0;
+    color:var(--ivory);
+  }
+  .section-head .rule{
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  /* ---------- Two-column intro blocks ---------- */
+  .split{
+    display:grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap:3.5rem;
+    align-items:start;
+  }
+  .split .tag{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    color:var(--gold-light);
+    font-size:1rem;
+  }
+  .split p{
+    color:var(--muted);
+    font-size:1rem;
+  }
+  .split strong{color:var(--ivory); font-weight:500;}
+
+  /* ---------- Sash Timeline ---------- */
+  .timeline{
+    position:relative;
+    margin-top:1rem;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:86px;
+    top:8px;
+    bottom:8px;
+    width:1px;
+    background:linear-gradient(var(--gold), var(--line));
+    opacity:0.6;
+  }
+  .t-item{
+    position:relative;
+    display:grid;
+    grid-template-columns: 86px 1fr;
+    column-gap:2.4rem;
+    padding-bottom:2.6rem;
+  }
+  .t-item:last-child{padding-bottom:0;}
+  .t-year{
+    position:relative;
+    text-align:right;
+    padding-right:1.6rem;
+  }
+  .t-year .ribbon{
+    display:inline-block;
+    background:linear-gradient(135deg, var(--gold) 0%, #A9821C 100%);
+    color:#0B3532;
+    font-weight:600;
+    font-size:0.85rem;
+    padding:0.35rem 0.55rem;
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+    min-width:64px;
+  }
+  .t-year::after{
+    content:"";
+    position:absolute;
+    right:-5px;
+    top:14px;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--bg-deep);
+    border:2px solid var(--gold);
+  }
+  .t-body h3{
+    margin:0 0 0.4rem;
+    font-size:1.15rem;
+    color:var(--ivory);
+    font-weight:600;
+  }
+  .t-body p{
+    margin:0;
+    color:var(--muted);
+    font-size:0.98rem;
+    max-width:62ch;
+  }
+
+  /* ---------- Pull quote ---------- */
+  .quote-wrap{
+    background:var(--bg-panel);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:5rem 6vw;
+    text-align:center;
+    position:relative;
+  }
+  .quote-wrap .mark{
+    font-family:'Playfair Display', serif;
+    font-size:3.5rem;
+    color:var(--gold);
+    line-height:1;
+    margin-bottom:0.5rem;
+  }
+  blockquote{
+    margin:0 auto;
+    max-width:46ch;
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:clamp(1.3rem, 2.6vw, 1.9rem);
+    color:var(--ivory);
+    line-height:1.4;
+  }
+  blockquote footer{
+    margin-top:1.4rem;
+    font-family:'Work Sans', sans-serif;
+    font-style:normal;
+    font-size:0.8rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+  }
+
+  /* ---------- Personal life cards ---------- */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1.6rem;
+    margin-top:1rem;
+  }
+  .card{
+    background:var(--bg-panel-2);
+    border:1px solid var(--line);
+    padding:1.8rem;
+    border-radius:2px;
+  }
+  .card h4{
+    margin:0 0 0.6rem;
+    font-family:'Playfair Display', serif;
+    color:var(--gold-light);
+    font-size:1.05rem;
+    font-weight:600;
+  }
+  .card p{margin:0; color:var(--muted); font-size:0.96rem;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:3.2rem 6vw;
+    border-top:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:1rem;
+  }
+  footer .credit{
+    font-size:0.85rem;
+    color:var(--muted);
+  }
+  footer .wiki-link{
+    font-size:0.85rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    border-bottom:1px solid var(--gold);
+    padding-bottom:2px;
+  }
+
+  /* ---------- Photo frames (signature element, sash-tagged) ---------- */
+  .frame{
+    position:relative;
+    background:var(--bg-panel-2);
+    border:1px solid var(--line);
+    overflow:hidden;
+  }
+  .frame img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .frame .fallback{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:0.6rem;
+    height:100%;
+    min-height:220px;
+    color:var(--muted);
+    font-size:0.78rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    text-align:center;
+    padding:1.5rem;
+    background:
+      repeating-linear-gradient(45deg, rgba(201,162,39,0.05) 0 12px, transparent 12px 24px);
+  }
+  .frame .fallback .path{
+    font-family:'Work Sans', monospace;
+    color:var(--gold-light);
+    font-size:0.72rem;
+    letter-spacing:0.02em;
+    text-transform:none;
+    opacity:0.85;
+  }
+  .frame::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border:1px solid transparent;
+    outline:1px solid var(--gold);
+    outline-offset:-6px;
+    pointer-events:none;
+    opacity:0.35;
+  }
+  .frame .cap{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    padding:0.55rem 0.9rem;
+    background:linear-gradient(0deg, rgba(11,53,50,0.92), transparent);
+    font-size:0.72rem;
+    letter-spacing:0.06em;
+    color:var(--gold-light);
+    text-transform:uppercase;
+  }
+
+  .hero-frame{
+    max-width:340px;
+    aspect-ratio:3/4;
+    margin-top:2.4rem;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.5);
+  }
+
+  .split .frame{
+    aspect-ratio:4/5;
+    align-self:start;
+  }
+
+  .t-item .frame{
+    aspect-ratio:16/10;
+    margin-top:1rem;
+  }
+
+  .gallery{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.2rem;
+    margin-top:2.4rem;
+  }
+  .gallery .frame{aspect-ratio:3/4;}
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(14px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible{
+    opacity:1;
+    transform:none;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:760px){
+    .split{grid-template-columns:1fr;}
+    .cards{grid-template-columns:1fr;}
+    .t-item{grid-template-columns:60px 1fr; column-gap:1.2rem;}
+    .timeline::before{left:60px;}
+    .t-year .ribbon{min-width:48px; font-size:0.72rem; padding:0.3rem 0.4rem;}
+    header{padding:4rem 6vw 3.5rem;}
+    section{padding:3.2rem 6vw;}
+  }
+</style>
+</head>
+<body>
+
+<header class="sash-bg">
+  <div class="eyebrow">Profile &mdash; Music, Pageantry &amp; Screen</div>
+  <h1>Engfa Waraha</h1>
+  <div class="title-line">
+    <div class="rule"></div>
+    <p class="role" style="margin:0;">Musician, Pageant Titleholder &amp; Actress</p>
+  </div>
+  <p class="lede">Engfa Waraha is a Thai singer, pageant titleholder, and award-winning actress from Uthai Thani. She stepped into music through a family of performers, built a second career on stage as Miss Grand Thailand 2022, and went on to become one of Thailand's most decorated young actresses.</p>
+  <div class="badge-row">
+    <span class="badge">Miss Grand Thailand 2022</span>
+    <span class="badge">1st Runner-Up &mdash; Miss Grand International 2022</span>
+    <span class="badge">Best Actress 2025, The Paradise of Thorns</span>
+    <span class="badge">Cannes Film Festival Honoree, 2025</span>
+  </div>
+  <div class="frame hero-frame">
+    <img src="images/hero.jpg" alt="Engfa Waraha" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+    <div class="fallback" style="display:none;">
+      <span>Add photo</span>
+      <span class="path">images/hero.png</span>
+    </div>
+  </div>
+</header>
+
+<section id="early-life">
+  <div class="section-head">
+    <span class="num">01</span>
+    <h2>Early Life &amp; Family</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="split reveal">
+    <div>
+      <div class="tag">Born 1995 &middot; Uthai Thani</div>
+      <div class="frame" style="margin-top:1.2rem;">
+        <img src="images/early-life.jpg" alt="Engfa Waraha, early life" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="fallback" style="display:none;">
+          <span>Add photo</span>
+          <span class="path">images/early-life.jpg</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p>Waraha was born in <strong>1995</strong> in Uthai Thani province, into a family of musicians &mdash; her father worked as a keyboardist and her mother sang <strong>luk thung</strong>, a style of Thai pop-country music.</p>
+      <p>In <strong>2013</strong>, a year after her father's death, she met a master of the Thai blessing ceremony known as <strong>Phonraphee Maneethai</strong> (Thai: &#3614;&#3619;&#3632;&#3614;&#3636;&#3608;&#3637; &#3617;&#3603;&#3637;&#3652;&#3607;&#3618;), who persuaded her to study officiating and traditional Thai verse singing (Thai: &#3626;&#3623;&#3604;&#3648;&#3626;&#3616;&#3634;) as a future career.</p>
+    </div>
+  </div>
+</section>
+
+<section id="career">
+  <div class="section-head">
+    <span class="num">02</span>
+    <h2>Music &amp; Early Work</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="timeline">
+    <div class="t-item reveal">
+      <div class="t-year"><span class="ribbon">2015</span></div>
+      <div class="t-body">
+        <h3>A contract to help her family</h3>
+        <p>At 17, as her father faced terminal cancer, Waraha signed a 12-year contract with Bangkok-based artist management agency <strong>Sangravee Entertainment</strong>. She released two singles this year, with two more to follow.</p>
+      </div>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-year"><span class="ribbon">2016</span></div>
+      <div class="t-body">
+        <h3>Working before the spotlight</h3>
+        <p>She released her remaining two singles under the contract. Before entering the national entertainment industry full-time, she also worked as a waitress, greengrocer, food vendor, caddie, and model.</p>
+      </div>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-year"><span class="ribbon">2018</span></div>
+      <div class="t-body">
+        <h3>Becoming &ldquo;Engfa Sangravee&rdquo;</h3>
+        <p>Waraha competed in the seventh season of the reality singing contest <strong>The Voice Thailand</strong>, becoming known by the stage name Engfa Sangravee. She was eliminated in the knockout round of the second phase.</p>
+        <div class="frame">
+          <img src="images/voice-thailand.jpg" alt="Engfa Waraha on The Voice Thailand" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="fallback" style="display:none;">
+            <span>Add photo</span>
+            <span class="path">images/voice-thailand.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pageantry">
+  <div class="section-head">
+    <span class="num">03</span>
+    <h2>Pageant Journey</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="timeline">
+    <div class="t-item reveal">
+      <div class="t-year"><span class="ribbon">2020</span></div>
+      <div class="t-body">
+        <h3>A first attempt, cut short</h3>
+        <p>Waraha entered Miss Grand Suphanburi, a provincial preliminary for Miss Grand Thailand, but withdrew due to contractual problems.</p>
+      </div>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-year"><span class="ribbon">2022</span></div>
+      <div class="t-body">
+        <h3>Miss Grand Bangkok, then Miss Grand Thailand</h3>
+        <p>She returned to pageantry and won <strong>Miss Grand Bangkok 2022</strong>, then went on to win <strong>Miss Grand Thailand 2022</strong>, crowned at Show DC Hall, Bangkok, representing the capital.</p>
+        <div class="frame">
+          <img src="images/miss-grand-thailand.jpg" alt="Engfa Waraha, Miss Grand Thailand 2022" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="fallback" style="display:none;">
+            <span>Add photo</span>
+            <span class="path">images/miss-grand-thailand.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-year"><span class="ribbon">2022</span></div>
+      <div class="t-body">
+        <h3>First runner-up, Miss Grand International</h3>
+        <p>Waraha represented Thailand at Miss Grand International 2022, held in Bogor Regency, Indonesia, on 25 October, and finished as first runner-up.</p>
+        <div class="frame">
+          <img src="images/miss-grand-international.jpg" alt="Engfa Waraha, Miss Grand International 2022" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="fallback" style="display:none;">
+            <span>Add photo</span>
+            <span class="path">images/miss-grand-international.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="acting">
+  <div class="section-head">
+    <span class="num">04</span>
+    <h2>Acting &amp; Screen Career</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="timeline">
+    <div class="t-item reveal">
+      <div class="t-year"><span class="ribbon">2023</span></div>
+      <div class="t-body">
+        <h3>Acting debut &mdash; <em>Show Me Love</em></h3>
+        <p>Waraha made her acting debut in the drama TV series <strong>Show Me Love</strong>, playing the breakout role of Meena. The same year, she hosted her own talk segment, <strong>Hello Engfa</strong>, on the WE DO channel, and headlined her second solo concert, <strong>Engfa Mahachon 2</strong>, at MGI Hall, Show DC, Bangkok.</p>
+        <div class="frame">
+          <img src="images/show-me-love.jpg" alt="Engfa Waraha in Show Me Love" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="fallback" style="display:none;">
+            <span>Add photo</span>
+            <span class="path">images/show-me-love.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-year"><span class="ribbon">2024</span></div>
+      <div class="t-body">
+        <h3>Film debut &mdash; <em>The Paradise of Thorns</em></h3>
+        <p>Waraha made her film debut in <strong>The Paradise of Thorns</strong> (&#3623;&#3636;&#3617;&#3634;&#3609;&#3627;&#3609;&#3634;&#3617;) as Mo Jongyoi &mdash; her breakthrough role. The film broke Thailand's 150-million-baht box office record and became the role that defined her acting career. The same year, she also starred as Rose in <strong>Bangkok Blossom</strong> and as Lieutenant Tul Chanwimol in the crime drama <strong>Petrichor</strong>.</p>
+        <div class="frame">
+          <img src="images/paradise-of-thorns.jpg" alt="Engfa Waraha in The Paradise of Thorns" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="fallback" style="display:none;">
+            <span>Add photo</span>
+            <span class="path">images/paradise-of-thorns.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-year"><span class="ribbon">2025</span></div>
+      <div class="t-body">
+        <h3>Cannes, and a growing filmography</h3>
+        <p>Waraha starred as Ping in the television series <strong>The Tipsy Mystery</strong>. In May, she was honored at the <strong>Women in Cinema Gala</strong>, hosted by the Red Sea Film Festival Foundation during the Cannes Film Festival, where her upcoming film <strong>Lady Bee</strong> &mdash; a feminist reinterpretation of the Thai literary classic <em>The Story of Jan Dara</em> &mdash; was announced.</p>
+        <div class="frame">
+          <img src="images/cannes-2025.jpg" alt="Engfa Waraha at Cannes Film Festival 2025" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="fallback" style="display:none;">
+            <span>Add photo</span>
+            <span class="path">images/cannes-2025.jpg</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="awards">
+  <div class="section-head">
+    <span class="num">05</span>
+    <h2>Awards &amp; Accomplishments</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="cards reveal" style="grid-template-columns:repeat(2, 1fr);">
+    <div class="card">
+      <h4>Best Actress of the Year &mdash; Thailand Box Office Awards</h4>
+      <p>2025, for <em>The Paradise of Thorns</em>.</p>
+    </div>
+    <div class="card">
+      <h4>Best Actress &mdash; Kom Chad Luek Awards</h4>
+      <p>2025, for <em>The Paradise of Thorns</em>.</p>
+    </div>
+    <div class="card">
+      <h4>Best Actress of the Year &mdash; Nine Entertain Awards</h4>
+      <p>2025.</p>
+    </div>
+    <div class="card">
+      <h4>Runner-up, Best Actress &mdash; 14th Thai Film Director Awards</h4>
+      <p>2025, for <em>The Paradise of Thorns</em>.</p>
+    </div>
+    <div class="card">
+      <h4>Actress of the Year &mdash; Thairath Awards</h4>
+      <p>2025, honored alongside recognition at the HOWE Awards.</p>
+    </div>
+    <div class="card">
+      <h4>Women in Cinema Honoree &mdash; Cannes Film Festival</h4>
+      <p>2025, hosted by the Red Sea Film Festival Foundation.</p>
+    </div>
+  </div>
+  <div class="gallery reveal">
+    <div class="frame">
+      <img src="images/award-1.jpg" alt="Engfa Waraha award ceremony" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback" style="display:none;"><span>Add photo</span><span class="path">images/award-1.jpg</span></div>
+    </div>
+    <div class="frame">
+      <img src="images/award-2.jpg" alt="Engfa Waraha award ceremony" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback" style="display:none;"><span>Add photo</span><span class="path">images/award-2.jpg</span></div>
+    </div>
+    <div class="frame">
+      <img src="images/award-3.jpg" alt="Engfa Waraha award ceremony" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+      <div class="fallback" style="display:none;"><span>Add photo</span><span class="path">images/award-3.jpg</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-wrap reveal">
+  <div class="mark">&ldquo;</div>
+  <blockquote>
+    Take care of yourself with the same priority and importance that you give to the people you love.
+    <footer>&mdash; Engfa Waraha</footer>
+  </blockquote>
+</div>
+
+<section id="personal-life">
+  <div class="section-head">
+    <span class="num">06</span>
+    <h2>Personal Life</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="split reveal">
+    <div>
+      <div class="frame">
+        <img src="images/personal-life.jpg" alt="Engfa Waraha" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="fallback" style="display:none;">
+          <span>Add photo</span>
+          <span class="path">images/personal-life.png</span>
+        </div>
+      </div>
+    </div>
+    <div class="cards" style="margin-top:0;">
+      <div class="card">
+        <h4>Identity</h4>
+        <p>Waraha has spoken publicly about being bisexual and has discussed relationships with people of more than one gender. Her openness has also sparked wider conversation about LGBTQ rights in Thailand.</p>
+      </div>
+      <div class="card">
+        <h4>Roots</h4>
+        <p>She grew up immersed in music through her parents' careers, an influence that runs through both her singing and her path into public life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="credit">Student project &middot; sources compiled for research purposes</span>
+  <a class="wiki-link" href="https://en.wikipedia.org/wiki/Engfa_Waraha" target="_blank" rel="noopener">Read more on Wikipedia &rarr;</a>
+</footer>
+
+<script>
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.15});
+  items.forEach(i => io.observe(i));
+</script>
+
+</body>
+</html>
